@@ -2,6 +2,7 @@ package Ex1Testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.Test;
 
 import Ex1.ComplexFunction;
@@ -28,17 +29,17 @@ class ComplexFunctionTest {
 		    String s = cf.toString();
 			function cf2 = cf.initFromString(s);
 			if(!cf.equals(cf2)) {
-				fail("ERR: "+cf+" should be equals to "+cf2);
+				fail(cf+" should be equals to "+cf2);
 			}
 			if(!cf.equals(cf3)) {
-				fail("ERR: "+cf+" should be equals to "+cf3);
+				fail(cf+" should be equals to "+cf3);
 			}
 	}
 		
 	@Test
 	void testComplexFunction() throws Exception {
-		String s1 = "3.1 +2.4x^2 -x^4";
-		String s2 = "5 +2x -3.3x +0.1x^5";
+		String s1 = "3.7 +2x^2 -x^3";
+		String s2 = "5 -5.6x +0.1x^5";
 		String[] s3 = {"x -1","x -2", "x -3", "x -4"};
 		Polynom p1 = new Polynom(s1);
 		Polynom p2 = new Polynom(s2);
@@ -52,7 +53,7 @@ class ComplexFunctionTest {
 		String s = cf.toString();
 		function cf5 = cf4.initFromString(s);
 		if(!cf.equals(cf5)) {
-			fail("ERR: "+cf+" should be equals to "+cf5);
+			fail(cf+" should be equals to "+cf5);
 		}
 		int size=10;
 		for(int i=0;i<size;i++) {
@@ -64,8 +65,8 @@ class ComplexFunctionTest {
 	}
 	
 	@Test
-	void ourTest1() throws Exception{
-		System.out.println("\nOur complicated equals test:");
+	void Test1() throws Exception{
+		System.out.println("\nComplex function test:");
 		String s1="x^2";
 		String s2="5";
 		Polynom p1=new Polynom(s1);
@@ -74,20 +75,18 @@ class ComplexFunctionTest {
 		ComplexFunction t2=new ComplexFunction("div",t1,p2);
 		ComplexFunction t3=new ComplexFunction("mul",t2,p2);
 		ComplexFunction t4=new ComplexFunction("div",p2,t3);
-
 		System.out.println(t4);
 		String y=t4.toString();
 		function fg=t4.initFromString(y);
-	
-		System.out.println(fg+" == "+t4);
+		System.out.println(fg+" should equal "+t4);
 		if(!t4.equals(fg)) {
-			fail("ERR: "+t4+" should be equals to "+fg);
+			fail(t4+" should be equals to "+fg);
 		}
 	}
 	
 	@Test 
-	void ourTest2() throws Exception{
-		System.out.println("\nOur all little functions: ");
+	void Test2() throws Exception{
+		System.out.println("\nFunction test: ");
 		Monom m1=new Monom("x");
 		Monom m2=new Monom("45x");
 		Monom m3=new Monom(2,2);
@@ -102,8 +101,8 @@ class ComplexFunctionTest {
 	}
 	
 	@Test
-	void ourTest3() throws Exception{
-		System.out.println("\ncopy check");
+	void Test3() throws Exception{
+		System.out.println("\ncopy test");
 		String [] st= {"10x^10","9x^9","8x^8","7x^7","6x^6","5x^5","4x^4","3x^3","2x^2","x","0"};
 		Polynom p1=new Polynom(st[0]);
 		Polynom p2=new Polynom(st[st.length/2]);
@@ -124,8 +123,8 @@ class ComplexFunctionTest {
 	}
 	
 	@Test
-	void ourTest4() throws Exception{
-		System.out.println("\nlast TEST: ");
+	void Test4() throws Exception{
+		System.out.println("\ntest4: ");
 		Polynom p1=new Polynom("x^3 - x^2 + x - 1.0");
 		Polynom p2=new Polynom("3.0x^2");
 		Monom m1=new Monom("2.0x");
@@ -139,10 +138,8 @@ class ComplexFunctionTest {
 		String s=cc.toString();
 		function f=cc.initFromString(s);
 		System.out.println(f);
-		
 		ComplexFunction tt=new ComplexFunction("max",cc,c1);
 		System.out.println(tt);
-		
 		assertEquals(tt.f(1),3.0);
 	}
 	

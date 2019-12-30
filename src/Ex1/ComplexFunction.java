@@ -67,7 +67,7 @@ public class ComplexFunction implements complex_function {
                 if(right.f(x) != 0 )
                     return left.f(x) / right.f(x);
                 else
-                    throw new ArithmeticException("Can't Divide with zero");
+                    throw new RuntimeException("Can't Divide with zero");
             case Min:
                 return Math.min(left.f(x),right.f(x));
             case Max:
@@ -82,7 +82,7 @@ public class ComplexFunction implements complex_function {
     }
 	
 	@Override
-	public function initFromString(String s) {//snir
+	public function initFromString(String s) {
 		if(!isBalanced(s))
 			throw new IllegalArgumentException("The delimiters are incorrect");
 
@@ -94,12 +94,12 @@ public class ComplexFunction implements complex_function {
 		int ind2 = findTheRightComma(s); 
 		int ind3 = s.lastIndexOf(')');
 
-		String rig= s.substring(ind2+2,ind3);
-		String lef = s.substring(ind1+1,ind2);
+		String right = s.substring(ind2+2,ind3);
+		String left = s.substring(ind1+1,ind2);
 		String oper = s.substring(0,ind1);
 
-		function p1=initFromString(lef);
-		function p2=initFromString(rig);
+		function p1=initFromString(left);
+		function p2=initFromString(right);
 		return new ComplexFunction(oper,p1,p2);		
 	}
 	private int findTheRightComma(String s) {
@@ -179,7 +179,7 @@ public class ComplexFunction implements complex_function {
 	/*
 	 * return right function
 	 */
-	
+	@Override
 	public function right() {
 		return this.right;
 	}
@@ -187,18 +187,12 @@ public class ComplexFunction implements complex_function {
 	/*
 	 * return Operation
 	 */
+	@Override
 	public Operation getOp() {
 		return this.oper;
 	}
-	private boolean isBalanced(String s) {
-		int counter = 0;
-		for (int i = 0; i < s.length(); i++) {
-			if(s.charAt(i) == '(') counter++;
-			else if(s.charAt(i) == ')') counter--;
-			if(counter < 0) return false;
-		}
-		return counter == 0;
-	}
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder ans = new StringBuilder();
@@ -211,6 +205,8 @@ public class ComplexFunction implements complex_function {
 
 		return ans.toString();
 	}
+	
+	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof ComplexFunction))
 			return false;
@@ -226,6 +222,17 @@ public class ComplexFunction implements complex_function {
 		}
 		return true;
 	}
+	
+	private boolean isBalanced(String s) {
+		int counter = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if(s.charAt(i) == '(') counter++;
+			else if(s.charAt(i) == ')') counter--;
+			if(counter < 0) return false;
+		}
+		return counter == 0;
+	}
+	
 	private Operation StrToOper(String operator) {
 		String s = operator.toLowerCase();
 
@@ -265,6 +272,7 @@ public class ComplexFunction implements complex_function {
 			throw new RuntimeException("bad operation");
 		}
 	}
+	
 	private void makeComplexFunction(function f1) {
 		if(f1!=null) {
 			ComplexFunction tmp = new ComplexFunction(this.oper,this.left,this.right);
