@@ -126,7 +126,13 @@ public class ComplexFunction implements complex_function {
 	}
 	@Override
 	public void plus(function f1) {
-		makeComplexFunction(f1);
+		if(f1!=null) {
+			ComplexFunction temp = new ComplexFunction(this.oper,this.left,this.right);
+			this.left=temp;
+			this.right=f1;
+		}else {
+			throw new IllegalArgumentException("The operation can't null");
+		}
 		this.oper=Operation.Plus;
 	}
 	/*
@@ -134,7 +140,13 @@ public class ComplexFunction implements complex_function {
 	 */
 	@Override
 	public void mul(function f1) {
-		makeComplexFunction(f1);
+		if(f1!=null) {
+			ComplexFunction temp = new ComplexFunction(this.oper,this.left,this.right);
+			this.left=temp;
+			this.right=f1;
+		}else {
+			throw new IllegalArgumentException("The operation can't null");
+		}
 		this.oper=Operation.Times;			
 	}
 	/*
@@ -142,7 +154,13 @@ public class ComplexFunction implements complex_function {
 	 */
 	@Override
 	public void div(function f1) {
-		makeComplexFunction(f1);
+		if(f1!=null) {
+			ComplexFunction temp = new ComplexFunction(this.oper,this.left,this.right);
+			this.left=temp;
+			this.right=f1;
+		}else {
+			throw new IllegalArgumentException("The operation can't null");
+		}
 		this.oper=Operation.Divid;
 	}
 	/*
@@ -150,7 +168,13 @@ public class ComplexFunction implements complex_function {
 	 */
 	@Override
 	public void max(function f1) {
-		makeComplexFunction(f1);
+		if(f1!=null) {
+			ComplexFunction temp = new ComplexFunction(this.oper,this.left,this.right);
+			this.left=temp;
+			this.right=f1;
+		}else {
+			throw new IllegalArgumentException("The operation can't null");
+		}
 		this.oper=Operation.Max;
 	}
 	/*
@@ -158,7 +182,13 @@ public class ComplexFunction implements complex_function {
 	 */
 	@Override
 	public void min(function f1) {
-		makeComplexFunction(f1);
+		if(f1!=null) {
+			ComplexFunction temp = new ComplexFunction(this.oper,this.left,this.right);
+			this.left=temp;
+			this.right=f1;
+		}else {
+			throw new IllegalArgumentException("The operation can't null");
+		}
 		this.oper=Operation.Min;
 	}
 	/*
@@ -166,7 +196,13 @@ public class ComplexFunction implements complex_function {
 	 */
 	@Override
 	public void comp(function f1) {
-		makeComplexFunction(f1);
+		if(f1!=null) {
+			ComplexFunction temp = new ComplexFunction(this.oper,this.left,this.right);
+			this.left=temp;
+			this.right=f1;
+		}else {
+			throw new IllegalArgumentException("The operation can't null");
+		}
 		this.oper=Operation.Comp;
 	}
 	/*
@@ -210,10 +246,10 @@ public class ComplexFunction implements complex_function {
 	public boolean equals(Object obj) {
 		if(!(obj instanceof ComplexFunction))
 			return false;
-		ComplexFunction _temp = (ComplexFunction) obj;
+		ComplexFunction temp = (ComplexFunction) obj;
 		for (int i = -5; i < 10 ;i++){
 			try {
-				if(this.f(i)!= _temp.f(i))
+				if(this.f(i)!= temp.f(i))
 					return false;
 
 			}catch (ArithmeticException ae){
@@ -271,16 +307,5 @@ public class ComplexFunction implements complex_function {
 		default:
 			throw new RuntimeException("bad operation");
 		}
-	}
-	
-	private void makeComplexFunction(function f1) {
-		if(f1!=null) {
-			ComplexFunction tmp = new ComplexFunction(this.oper,this.left,this.right);
-			this.left=tmp;
-			this.right=f1;
-		}else {
-			throw new IllegalArgumentException("The cannot operation null");
-		}
-
 	}
 }
